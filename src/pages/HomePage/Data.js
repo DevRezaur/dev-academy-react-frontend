@@ -53,3 +53,46 @@ export const testimonialObject = {
     img: require('../../images/rezaur.png').default,
     alt: 'image',
 }
+
+export const topCourses = [
+    {
+        id: 1,
+        image: require('../../images/spring.jpg').default,
+        alt: 'course',
+        title: 'Java Spring & Spring Boot',
+        desc: `Spring Framework is the most demanded Java enterprise framework. 
+            Learn Spring Framework 5.0 with Spring Boot 2.0 now. And fulfill your dream to become a 
+            enterprise application developer.`,
+        label: 'Enroll Now',
+    },
+    {
+        id: 2,
+        image: require('../../images/spring.jpg').default,
+        alt: 'course',
+        title: 'Java Spring & Spring Boot',
+        desc: `Spring Framework is the most demanded Java enterprise framework. 
+            Learn Spring Framework 5.0 with Spring Boot 2.0 now. And fulfill your dream to become a 
+            enterprise application developer.`,
+        label: 'Enroll Now',
+    },
+    {
+        id: 3,
+        image: require('../../images/spring.jpg').default,
+        alt: 'course',
+        title: 'Java Spring & Spring Boot',
+        desc: `Spring Framework is the most demanded Java enterprise framework. 
+            Learn Spring Framework 5.0 with Spring Boot 2.0 now. And fulfill your dream to become a 
+            enterprise application developer.`,
+        label: 'Enroll Now',
+    },
+    {
+        id: 4,
+        image: require('../../images/spring.jpg').default,
+        alt: 'course',
+        title: 'Java Spring & Spring Boot',
+        desc: `Spring Framework is the most demanded Java enterprise framework. 
+            Learn Spring Framework 5.0 with Spring Boot 2.0 now. And fulfill your dream to become a 
+            enterprise application developer.`,
+        label: 'Enroll Now',
+    }
+]
