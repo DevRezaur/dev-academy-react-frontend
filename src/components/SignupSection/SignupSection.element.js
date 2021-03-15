@@ -9,7 +9,7 @@ export const GridWrapper = styled.div`
     grid-template-areas: "left-section"
                         "right-section";
     row-gap: 50px;
-    column-gap: 40px;
+    column-gap: 40px; 
     padding-top: 40px;
     padding-bottom: 100px;
 
@@ -61,7 +61,8 @@ export const Heading = styled.h1`
 export const SubHeading = styled.p`
     font-size: 1rem;
     color: darkgray;
-    margin:${({center}) => (center ? '1.5rem auto 0.5rem auto' : '1.5rem 0 0.5rem 0')};
+    margin: 1.5rem 0 0.5rem 0;
+    text-align: ${({center}) => (center ? 'center' : 'left')};
 `;
 
 export const InputBox = styled.input`

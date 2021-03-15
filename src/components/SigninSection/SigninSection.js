@@ -34,11 +34,11 @@ const SigninSection = () => {
                         </SubHeading>
                         <InputBox type="text" value={password} onChange={(e) => setPassword(e.target.value)} />
                         <ButtonModified primary={true} onClick={() => {alert("Button Clicked")}}>
-                            Continue
+                            Login
                         </ButtonModified>
                         <SubHeading center>
                             Click here to
-                            <TextLink to="/sign-in" onClick={() => {alert("Link Clicked")}}>
+                            <TextLink to="/sign-up">
                                 Sign-Up
                             </TextLink>
                         </SubHeading>
