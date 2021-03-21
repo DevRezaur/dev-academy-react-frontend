@@ -1,5 +1,8 @@
 import axios from 'axios';
-import React, { useState } from 'react'
+import React from 'react'
+import { useForm } from 'react-hook-form'
+import { yupResolver } from '@hookform/resolvers/yup'
+import * as yup from 'yup'
 import { Container } from '../../globalStyles'
 import { ButtonModified, GridWrapper, 
         Heading, 
@@ -8,25 +11,33 @@ import { ButtonModified, GridWrapper,
         LeftSection, 
         RightSection, 
         SubHeading, 
-        TextLink} from './SigninSection.element'
+        TextLink,
+        Warning} from './SigninSection.element'
+
+
+const schema = yup.object().shape({
+    email: yup.string().required().email(),
+    password: yup.string().required().min(5),
+});
 
 const SigninSection = () => {
 
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
+    const { register, handleSubmit, errors } = useForm({
+        resolver: yupResolver(schema),
+    });
 
-    const login = async () => {
+    const onSubmit = async (data) => {
         await axios({
             method: 'POST',
             url: 'http://localhost:8080/auth/authenticate',
             data: {
-                email: email,
-                password: password,
+                email: data.email,
+                password: data.password,
             }
         }).then((response) => {
             if (response.data.jwt) {
               //localStorage.setItem("user", JSON.stringify(response.data));
-              console.log(response.data.jwt)
+              alert(response.data.jwt)
             }
             return response.data;
         });
@@ -39,19 +50,25 @@ const SigninSection = () => {
                     <LeftSection>
                         <Image src={require('../../images/login.svg').default} alt="coder" />
                     </LeftSection>
-                    <RightSection>
+                    <RightSection onSubmit={handleSubmit(onSubmit)}>
                         <Heading>
                             Sign In
                         </Heading>
                         <SubHeading>
                             Email
                         </SubHeading>
-                        <InputBox type="text" value={email} onChange={(e) => setEmail(e.target.value)} />
+                        <InputBox type="email" name='email' ref={register} />
+                        <Warning>
+                            {errors['email']?.message}
+                        </Warning>
                         <SubHeading>
                             Password
                         </SubHeading>
-                        <InputBox type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
-                        <ButtonModified primary={true} onClick={login}>
+                        <InputBox type="password" name='password' ref={register} />
+                        <Warning>
+                            {errors['password']?.message}
+                        </Warning>
+                        <ButtonModified type="submit" primary={true}>
                             Login
                         </ButtonModified>
                         <SubHeading center>

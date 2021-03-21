@@ -33,7 +33,7 @@ export const LeftSection = styled.div`
     }
 `;
 
-export const RightSection = styled.div`
+export const RightSection = styled.form`
     grid-area: "right-section";
     display: flex;
     flex-direction: column;
@@ -61,13 +61,19 @@ export const Heading = styled.h1`
 export const SubHeading = styled.p`
     font-size: 1rem;
     color: darkgray;
-    margin:${({center}) => (center ? '1.5rem auto 0.5rem auto' : '1.5rem 0 0.5rem 0')};
+    margin:${({center}) => (center ? '1rem auto 0.5rem auto' : '1rem 0 0.5rem 0')};
+`;
+
+export const Warning = styled.p`
+    font-size: 1rem;
+    color: #4b59f7;
 `;
 
 export const InputBox = styled.input`
     height: 30px;
     padding-left: 10px;
     padding-right: 10px;
+    margin-bottom: 0.7rem;
 `;
 
 export const ButtonModified = styled(Button)`
