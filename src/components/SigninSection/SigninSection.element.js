@@ -66,7 +66,8 @@ export const SubHeading = styled.p`
 
 export const Warning = styled.p`
     font-size: 1rem;
-    color: #4b59f7;
+    color: ${({failed}) => (failed ? 'red' : '#4b59f7')};
+    margin: ${({failed}) => (failed ? '0 auto 1rem auto' : '0')};
 `;
 
 export const InputBox = styled.input`

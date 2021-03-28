@@ -33,7 +33,7 @@ export const LeftSection = styled.div`
     }
 `;
 
-export const RightSection = styled.div`
+export const RightSection = styled.form`
     grid-area: "right-section";
     display: flex;
     flex-direction: column;

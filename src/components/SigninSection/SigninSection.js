@@ -1,5 +1,5 @@
 import axios from 'axios';
-import React from 'react'
+import React, { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import * as yup from 'yup'
@@ -26,6 +26,8 @@ const SigninSection = () => {
         resolver: yupResolver(schema),
     });
 
+    const [warning, setWarning] = useState('');
+
     const onSubmit = async (data) => {
         await axios({
             method: 'POST',
@@ -34,12 +36,14 @@ const SigninSection = () => {
                 email: data.email,
                 password: data.password,
             }
-        }).then((response) => {
+        })
+        .then((response) => { 
             if (response.data.jwt) {
-              //localStorage.setItem("user", JSON.stringify(response.data));
-              alert(response.data.jwt)
+                localStorage.setItem("token", JSON.stringify(response.data.jwt));
             }
-            return response.data;
+        })
+        .catch((error) => {
+            setWarning(error.response.data);
         });
     }
 
@@ -51,6 +55,9 @@ const SigninSection = () => {
                         <Image src={require('../../images/login.svg').default} alt="coder" />
                     </LeftSection>
                     <RightSection onSubmit={handleSubmit(onSubmit)}>
+                        <Warning failed>
+                            {warning}
+                        </Warning>
                         <Heading>
                             Sign In
                         </Heading>
