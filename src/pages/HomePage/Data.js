@@ -56,7 +56,7 @@ export const testimonialObject = {
 
 export const topCourses = [
     {
-        id: 1,
+        id: 10001,
         image: require('../../images/spring.jpg').default,
         alt: 'course',
         title: 'Java Spring & Spring Boot',
@@ -66,7 +66,7 @@ export const topCourses = [
         label: 'Enroll Now',
     },
     {
-        id: 2,
+        id: 10002,
         image: require('../../images/python.png').default,
         alt: 'course',
         title: 'Python with Django',
@@ -76,7 +76,7 @@ export const topCourses = [
         label: 'Enroll Now',
     },
     {
-        id: 3,
+        id: 10003,
         image: require('../../images/react.jpg').default,
         alt: 'course',
         title: 'React Js & Styled Components',

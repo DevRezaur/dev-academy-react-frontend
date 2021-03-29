@@ -13,6 +13,7 @@ import { ButtonModified, GridWrapper,
         SubHeading, 
         TextLink,
         Warning} from './SigninSection.element'
+import { useHistory } from 'react-router';
 
 
 const schema = yup.object().shape({
@@ -27,6 +28,7 @@ const SigninSection = () => {
     });
 
     const [warning, setWarning] = useState('');
+    const history = useHistory();
 
     const onSubmit = async (data) => {
         await axios({
@@ -40,10 +42,13 @@ const SigninSection = () => {
         .then((response) => { 
             if (response.data.jwt) {
                 localStorage.setItem("token", JSON.stringify(response.data.jwt));
+                //console.log(response.data);
+                history.push('/admin/dashboard');
             }
         })
         .catch((error) => {
             setWarning(error.response.data);
+            console.log(error);
         });
     }
 

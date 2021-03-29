@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Button, Container } from '../../globalStyles';
-import { topCourses } from '../../pages/HomePage/Data';
 import { Card,
         CardDesc,
         CardImage,
@@ -9,14 +8,30 @@ import { Card,
         CardWrapper,
         Heading,
         TextWrapper } from './CourseSection.element';
+import axios from 'axios';
 
 const CourseSection = () => {
 
     const [courses, setCourses] = useState([])
 
     useEffect(() => {
-        setCourses([...topCourses]);
+        getTopCourses();
     }, []);
+
+    const getTopCourses = async () => {
+        await axios({
+            method: 'GET',
+            url: 'http://localhost:8080/general/course/getAll',
+        })
+        .then((response) => { 
+            if (response.data) {
+                setCourses(response.data)
+            }
+        })
+        .catch((error) => {
+            console.log(error);
+        });
+    };
 
     return (
         <>
@@ -25,9 +40,9 @@ const CourseSection = () => {
                     Top Cousrses
                 </Heading>
                 <CardWrapper>
-                    {courses.map((course, i) =>
-                    <Card key={i}>
-                        <CardImage src={course.image} alt={course.alt} />
+                    {courses.map((course) =>
+                    <Card key={course.id}>
+                        <CardImage src={require('../../images/' + course.imageUrl).default} alt='Course Image' />
                         <TextWrapper>
                             <CardTitle>
                                 {course.title}
@@ -37,7 +52,7 @@ const CourseSection = () => {
                             </CardDesc>
                             <Link to='/sign-in'>
                                 <Button fullWidth primary="primary">
-                                    {course.label}
+                                    Enroll Now
                                 </Button>
                             </Link>
                         </TextWrapper>
