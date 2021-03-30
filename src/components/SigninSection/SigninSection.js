@@ -1,9 +1,10 @@
 import axios from 'axios';
-import React, { useState } from 'react'
-import { useForm } from 'react-hook-form'
-import { yupResolver } from '@hookform/resolvers/yup'
-import * as yup from 'yup'
-import { Container } from '../../globalStyles'
+import React, { useEffect, useState } from 'react';
+import { useForm } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
+import { Container } from '../../globalStyles';
+import { useHistory } from 'react-router';
+import * as yup from 'yup';
 import { ButtonModified, GridWrapper, 
         Heading, 
         Image, 
@@ -12,25 +13,31 @@ import { ButtonModified, GridWrapper,
         RightSection, 
         SubHeading, 
         TextLink,
-        Warning} from './SigninSection.element'
-import { useHistory } from 'react-router';
-
-
-const schema = yup.object().shape({
-    email: yup.string().required().email(),
-    password: yup.string().required().min(5),
-});
+        Warning} from './SigninSection.element';
 
 const SigninSection = () => {
+    const [warning, setWarning] = useState('');
+    const [user, setUser] = useState({});
+    const history = useHistory();
+
+    useEffect(() => {
+        localStorage.setItem('user', JSON.stringify(user));
+    }, [user]);
+
+    const schema = yup.object().shape({
+        email: yup.string().required().email(),
+        password: yup.string().required().min(5),
+    });
 
     const { register, handleSubmit, errors } = useForm({
         resolver: yupResolver(schema),
     });
 
-    const [warning, setWarning] = useState('');
-    const history = useHistory();
+    const onSubmit = (data) => {
+        signIn(data);
+    }
 
-    const onSubmit = async (data) => {
+    const signIn = async (data) => {
         await axios({
             method: 'POST',
             url: 'http://localhost:8080/auth/authenticate',
@@ -39,15 +46,40 @@ const SigninSection = () => {
                 password: data.password,
             }
         })
-        .then((response) => { 
+        .then((response) => {
             if (response.data.jwt) {
-                localStorage.setItem("token", JSON.stringify(response.data.jwt));
-                //console.log(response.data);
-                history.push('/admin/dashboard');
+                localStorage.setItem('jwt', response.data.jwt);
+                getUserData(response.data.jwt);
             }
         })
         .catch((error) => {
-            setWarning(error.response.data);
+            setWarning('Login Failed !');
+        });
+    }
+
+    const getUserData = async (jwt) => {
+        await axios({
+            method: 'POST',
+            url: 'http://localhost:8080/auth/userinfo',
+            headers: {
+                'Authorization': `Bearer ${jwt}`
+            }
+        })
+        .then((response) => { 
+            if (response.data) {
+                setUser({
+                    id: response.data.id,
+                    fullname: response.data.fullname,
+                    imageUrl: response.data.imageUrl,
+                    role: response.data.roles[0].role
+                });
+                if(response.data.roles[0].role === "ADMIN")
+                    history.push('/admin/dashboard');
+                else if(response.data.roles[0].role === "USER")
+                    history.push('/user/dashboard');
+            }
+        })
+        .catch((error) => {
             console.log(error);
         });
     }

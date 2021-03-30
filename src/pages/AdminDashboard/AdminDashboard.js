@@ -1,10 +1,13 @@
-import React from 'react'
+import React from 'react';
 
 const AdminDashboard = () => {
+    let user = JSON.parse(localStorage.getItem('user'))
+
     return (
-        <div>
+        <>
             <h1>Admin Dashboard</h1>
-        </div>
+            <p>Hi {user.fullname}</p>
+        </>
     )
 }
 

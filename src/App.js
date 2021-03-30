@@ -6,13 +6,11 @@ import Home from './pages/HomePage/Home';
 import Signin from './pages/SigninPage/Signin';
 import Signup from './pages/SignupPage/Signup';
 import ScrollToTop from './components/ScrollToTop';
-import Store from './DataStore/Store';
 import UserDashboard from './pages/UserDashboard/UserDashboard';
 import AdminDashboard from './pages/AdminDashboard/AdminDashboard';
 
 function App() {
   return (
-    <Store>
       <Router>
         <ScrollToTop />
         <GlobalStyle />
@@ -25,7 +23,6 @@ function App() {
         </Switch>
         <Footer />
       </Router>
-    </Store>
   );
 }
 

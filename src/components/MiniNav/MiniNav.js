@@ -30,7 +30,10 @@ const MiniNav = () => {
 
     useEffect(() => {
         showButton();
-        return () => setClick(false);
+        return () => {
+            setButtonLabelSm(false);
+            setClick(false);
+        };
     },[])
 
     window.addEventListener('resize', showButton);
