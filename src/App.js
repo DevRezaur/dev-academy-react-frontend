@@ -8,6 +8,7 @@ import Signup from './pages/SignupPage/Signup';
 import ScrollToTop from './components/ScrollToTop';
 import UserDashboard from './pages/UserDashboard/UserDashboard';
 import AdminDashboard from './pages/AdminDashboard/AdminDashboard';
+import PrivateRoute from './services/PrivateRoute';
 
 function App() {
   return (
@@ -18,8 +19,8 @@ function App() {
           <Route path='/' exact component={Home} />
           <Route path='/sign-in' exact component={Signin} />
           <Route path='/sign-up' exact component={Signup} />
-          <Route path='/user/dashboard' exact component={UserDashboard} />
-          <Route path='/admin/dashboard' exact component={AdminDashboard} />
+          <PrivateRoute role='USER' path='/user/dashboard' exact component={UserDashboard} />
+          <PrivateRoute role='ADMIN' path='/admin/dashboard' exact component={AdminDashboard} />
         </Switch>
         <Footer />
       </Router>
