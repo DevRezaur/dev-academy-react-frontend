@@ -1,17 +1,14 @@
 import React from 'react';
-import { PrivateNav } from '../../components';
-
+import { ControlPanel, PrivateNav } from '../../components';
 
 const AdminDashboard = () => {
-    let user = JSON.parse(localStorage.getItem('user'))
 
     return (
         <>
             <PrivateNav />
-            <h1>Admin Dashboard</h1>
-            <p>Hi {user.fullname}</p>
+            <ControlPanel />
         </>
     )
 }
 
-export default AdminDashboard
+export default AdminDashboard;

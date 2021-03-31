@@ -6,3 +6,4 @@ export { default as MiniNav } from './MiniNav/MiniNav';
 export { default as SigninSection } from './SigninSection/SigninSection';
 export { default as SignupSection } from './SignupSection/SignupSection';
 export { default as PrivateNav } from './PrivateNav/PrivateNav';
+export { default as ControlPanel } from './ControlPanel/ControlPanel';

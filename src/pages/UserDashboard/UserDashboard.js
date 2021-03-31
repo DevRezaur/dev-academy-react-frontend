@@ -7,8 +7,7 @@ const UserDashboard = () => {
     return (
         <>
             <PrivateNav />
-            <h1>User Dashboard</h1>
-            <p>Hi {user.fullname}</p>
+            <h1>Hi ${user.fullname}</h1>
         </>
     )
 }

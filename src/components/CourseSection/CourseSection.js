@@ -11,11 +11,16 @@ import { Card,
 import axios from 'axios';
 
 const CourseSection = () => {
-
-    const [courses, setCourses] = useState([])
+    const [user, setUser] = useState({});
+    const [courses, setCourses] = useState([]);
 
     useEffect(() => {
+        setUser(JSON.parse(localStorage.getItem('user')));
         getTopCourses();
+        return () => {
+            setUser({});
+            setCourses([]);
+        };
     }, []);
 
     const getTopCourses = async () => {
@@ -37,7 +42,7 @@ const CourseSection = () => {
         <>
             <Container id="course">
                 <Heading>
-                    Top Cousrses
+                    Our Cousrses
                 </Heading>
                 <CardWrapper>
                     {courses.map((course) =>
@@ -50,11 +55,18 @@ const CourseSection = () => {
                             <CardDesc>
                                 {course.desc}
                             </CardDesc>
-                            <Link to='/sign-in'>
-                                <Button fullWidth primary="primary">
-                                    Enroll Now
-                                </Button>
-                            </Link>
+                            {(user && user.role==='ADMIN') ?
+                                (<Link to='/sign-in'>
+                                    <Button fullWidth primary="primary">
+                                        Manage Course
+                                    </Button>
+                                </Link>) :
+                                (<Link to='/sign-in'>
+                                    <Button fullWidth primary="primary">
+                                        Enroll Now
+                                    </Button>
+                                </Link>)
+                            }
                         </TextWrapper>
                     </Card>
                     )}

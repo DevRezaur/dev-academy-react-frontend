@@ -9,6 +9,7 @@ import ScrollToTop from './components/ScrollToTop';
 import UserDashboard from './pages/UserDashboard/UserDashboard';
 import AdminDashboard from './pages/AdminDashboard/AdminDashboard';
 import PrivateRoute from './services/PrivateRoute';
+import ManageCourses from './pages/ManageCourses/ManageCourses';
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
           <Route path='/sign-up' exact component={Signup} />
           <PrivateRoute role='USER' path='/user/dashboard' exact component={UserDashboard} />
           <PrivateRoute role='ADMIN' path='/admin/dashboard' exact component={AdminDashboard} />
+          <PrivateRoute role='ADMIN' path='/admin/courses' exact component={ManageCourses} />
         </Switch>
         <Footer />
       </Router>
