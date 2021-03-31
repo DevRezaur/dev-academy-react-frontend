@@ -33,7 +33,7 @@ const ControlPanel = () => {
                                 Manage Courses
                             </StyledButton>
                         </Link>
-                        <Link to='/sign-in'>
+                        <Link to='/add/course'>
                             <StyledButton fullWidth primary="primary">
                                 Add Courses
                             </StyledButton>
@@ -46,6 +46,11 @@ const ControlPanel = () => {
                         <Link to='/sign-in'>
                             <StyledButton fullWidth primary="primary">
                                 View Students
+                            </StyledButton>
+                        </Link>
+                        <Link to='/sign-in'>
+                            <StyledButton fullWidth primary="primary">
+                                Add Admins
                             </StyledButton>
                         </Link>
                     </ButtonWrapper>
