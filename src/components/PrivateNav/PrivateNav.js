@@ -17,6 +17,7 @@ import {
 const PrivateNav = () => {
     const [click, setClick] = useState(false);
     const [buttonLabelSm, setButtonLabelSm] = useState(true);
+    let user = JSON.parse(localStorage.getItem('user'));
 
     const handleClick = () => setClick(!click);
 
@@ -52,14 +53,22 @@ const PrivateNav = () => {
                     </MobileIcon>
                     <NavMenu click={click}>
                         <NavItem>
-                            <NavLink to='/sign-in' onClick={handleClick}>
-                                Dashboard
-                            </NavLink>
+                            {(user && user.role === 'ADMIN') ? 
+                                (<NavLink to='/admin/dashboard' onClick={handleClick}>
+                                    Admin Dashboard
+                                </NavLink>) :
+                                (<NavLink to='/user/dashboard' onClick={handleClick}>
+                                    User Dashboard
+                                </NavLink>) }
                         </NavItem>
                         <NavItem>
-                            <NavLink to='/sign-in' onClick={handleClick}>
-                                Profile
-                            </NavLink>
+                            {(user && user.role === 'ADMIN') ? 
+                                (<NavLink to='/admin/profile' onClick={handleClick}>
+                                    Admin Profile
+                                </NavLink>) :
+                                (<NavLink to='/user/profile' onClick={handleClick}>
+                                    User Profile
+                                </NavLink>) }
                         </NavItem>
                         <NavItemBtn>
                             {buttonLabelSm ? (

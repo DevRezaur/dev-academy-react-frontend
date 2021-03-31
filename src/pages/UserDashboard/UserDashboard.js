@@ -1,10 +1,15 @@
-import React from 'react'
+import React from 'react';
+import { PrivateNav } from '../../components';
 
 const UserDashboard = () => {
+    let user = JSON.parse(localStorage.getItem('user'))
+
     return (
-        <div>
+        <>
+            <PrivateNav />
             <h1>User Dashboard</h1>
-        </div>
+            <p>Hi {user.fullname}</p>
+        </>
     )
 }
 
