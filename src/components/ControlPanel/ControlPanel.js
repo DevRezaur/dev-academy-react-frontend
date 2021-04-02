@@ -1,32 +1,17 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import { Link } from 'react-router-dom';
 import { Container } from '../../globalStyles';
 import {
         Wrapper,
-        Heading,
         StyledButton,
-        ButtonWrapper, 
-        SubTitle} from './ControlPanel.element';
+        ButtonWrapper } from './ControlPanel.element';
 
 const ControlPanel = () => {
-    const [user, setUser] = useState({});
-
-    useEffect(() => {
-        setUser(JSON.parse(localStorage.getItem('user')));
-        return () => setUser({});
-    }, []);
 
     return (
         <>
             <Wrapper>
                 <Container>
-                    <Heading>
-                        Hi, {user.fullname}
-                    </Heading>
-                    <SubTitle>
-                        Welcome to admin dashboard. This is the main control panel. From there, as an 
-                        authorized admin, you can manage all the administritive activity of Dev Academy.
-                    </SubTitle>
                     <ButtonWrapper>
                         <Link to='/admin/courses'>
                             <StyledButton fullWidth primary="primary">

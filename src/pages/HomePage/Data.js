@@ -53,36 +53,3 @@ export const testimonialObject = {
     img: require('../../images/rezaur.png').default,
     alt: 'image',
 }
-
-export const topCourses = [
-    {
-        id: 10001,
-        image: require('../../images/spring.jpg').default,
-        alt: 'course',
-        title: 'Java Spring & Spring Boot',
-        desc: `Spring Framework is the most demanded Java enterprise framework. 
-            Learn Spring Framework 5.0 with Spring Boot 2.0 now. And fulfill your dream to become a 
-            enterprise application developer.`,
-        label: 'Enroll Now',
-    },
-    {
-        id: 10002,
-        image: require('../../images/python.png').default,
-        alt: 'course',
-        title: 'Python with Django',
-        desc: `Python is growing so fast. Currently its the number one programming language. 
-            From general programming to machine learning, anything you can do with Python. 
-            So learn Python today with its amazing Django Framework.`,
-        label: 'Enroll Now',
-    },
-    {
-        id: 10003,
-        image: require('../../images/react.jpg').default,
-        alt: 'course',
-        title: 'React Js & Styled Components',
-        desc: `React JS is the most loved JavaScript library around the world. It was 
-            developed by Facebook Corporation. It is popular beacuse of its easy learning 
-            curve. More and more reple are switching to React.`,
-        label: 'Enroll Now',
-    }
-]
