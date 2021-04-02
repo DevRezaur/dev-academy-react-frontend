@@ -54,6 +54,7 @@ const SigninSection = () => {
         })
         .catch((error) => {
             setWarning('Login Failed !');
+            console.log(error);
         });
     }
 

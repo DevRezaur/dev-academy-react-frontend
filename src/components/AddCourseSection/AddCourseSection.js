@@ -64,6 +64,7 @@ const AddCourseSection = () => {
             }
         })
         .catch((error) => {
+            setFailed(true);
             setWarning('Failed to add course !');
             console.log(error);
         });
@@ -84,6 +85,7 @@ const AddCourseSection = () => {
             }
         })
         .catch((error) => {
+            setFailed(true);
             setWarning('Failed to add image !');
             console.log(error);
         });   

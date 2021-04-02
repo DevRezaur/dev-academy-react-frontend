@@ -16,8 +16,8 @@ export const GridWrapper = styled.div`
     @media screen and (min-width: 800px) {
         grid-template-columns: 1fr 1fr;
         grid-template-areas: "left-section right-section";
-        padding-top: 10px;
-        padding-bottom: 10px;
+        padding-top: 30px;
+        padding-bottom: 30px;
     }
 `;
 
@@ -46,10 +46,22 @@ export const RightSection = styled.form`
     }
 `;
 
+export const TopWarning = styled.p`
+    font-size: 1.1rem;
+    color: ${({failed}) => (failed ? 'red' : 'green')};
+    margin: 0 auto 1.5rem auto;
+`;
+
 export const Image = styled.img`
     width: 100%;
     max-width: 500px;
     height: auto;
+`;
+
+export const Warning = styled.p`
+    font-size: 1rem;
+    color: ${({failed}) => (failed ? 'red' : '#4b59f7')};
+    margin: ${({failed}) => (failed ? '0 auto 1rem auto' : '0')};
 `;
 
 export const Heading = styled.h1`
@@ -69,6 +81,7 @@ export const InputBox = styled.input`
     height: 30px;
     padding-left: 10px;
     padding-right: 10px;
+    margin-bottom: 0.7rem;
 `;
 
 export const ButtonModified = styled(Button)`
