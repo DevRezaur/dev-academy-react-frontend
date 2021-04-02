@@ -47,7 +47,7 @@ const CourseSection = () => {
                 <CardWrapper>
                     {courses.map((course) =>
                     <Card key={course.id}>
-                        <CardImage src={require('../../images/' + course.imageUrl).default} alt='Course Image' />
+                        <CardImage src={require('../../Local Bucket/' + course.imageUrl).default} alt='Course Image' />
                         <TextWrapper>
                             <CardTitle>
                                 {course.title}

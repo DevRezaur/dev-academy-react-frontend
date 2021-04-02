@@ -3,6 +3,7 @@ import { Container } from '../../globalStyles';
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm } from 'react-hook-form';
+import axios from 'axios';
 import { ButtonModified, GridWrapper, 
         Heading, 
         Image, 
@@ -10,19 +11,20 @@ import { ButtonModified, GridWrapper,
         LeftSection, 
         RightSection, 
         SubHeading,
+        TopWarning,
         Warning,
-        TextBox} from './AddCourseSection.element'
+        TextBox,
+        SwitchWrapper,
+        CheckBox} from './AddCourseSection.element'
 
 const AddCourseSection = () => {
-    // const [title, setTitle] = useState('');
-    // const [description, setDescription] = useState('');
-    // const [imageUrl, setImageUrl] = useState('');
     const [warning, setWarning] = useState('');
+    const [failed, setFailed] = useState(true);
+    let imageUrl = 'default_course.jpg';
 
     const schema = yup.object().shape({
         title: yup.string().required(),
-        description: yup.string().required(),
-        imageUrl: yup.string().required(),
+        description: yup.string().required()
     });
 
     const { register, handleSubmit, errors } = useForm({
@@ -30,7 +32,61 @@ const AddCourseSection = () => {
     });
 
     const onSubmit = (data) => {
-        
+        if(data.imageUrl[0]) {
+            imageUrl = data.imageUrl[0].name;
+            uploadImage(data.imageUrl[0]);
+        }
+        if(data.status)
+            data.status = 'running';
+        else
+            data.status = 'down';
+        addCourse(data);
+    }
+
+    const addCourse = async (data) => {
+        await axios({
+            method: 'POST',
+            url: 'http://localhost:8080/admin/addCourse',
+            headers: {
+                'Authorization': `Bearer ${localStorage.getItem('jwt')}`
+            },
+            data: {
+                'title': data.title,
+                'desc': data.description,
+                'imageUrl': imageUrl,
+                'status': data.status,
+            }
+        })
+        .then((response) => { 
+            if (response.data) {
+                setFailed(false);
+                setWarning('Course added successfully !');
+            }
+        })
+        .catch((error) => {
+            setWarning('Failed to add course !');
+            console.log(error);
+        });
+    };
+
+    const uploadImage = async (image) => {
+        const formData = new FormData();
+		formData.append('file', image);
+
+        await axios.post('http://localhost:8080/general/uploadFile', formData, {
+            headers: {
+              'Content-Type': 'multipart/form-data'
+            }
+        })
+        .then((response) => { 
+            if (response.data) {
+                setFailed(false);
+            }
+        })
+        .catch((error) => {
+            setWarning('Failed to add image !');
+            console.log(error);
+        });   
     }
 
     return (
@@ -38,12 +94,12 @@ const AddCourseSection = () => {
             <Container>
                 <GridWrapper>
                     <LeftSection>
-                        <Image src={require('../../images/login.svg').default} alt="coder" />
+                        <Image src={require('../../images/course.svg').default} alt="coder" />
                     </LeftSection>
                     <RightSection onSubmit={handleSubmit(onSubmit)}>
-                        <Warning failed>
+                        <TopWarning failed = {failed}>
                             {warning}
-                        </Warning>
+                        </TopWarning>
                         <Heading>
                             Add New Course
                         </Heading>
@@ -57,17 +113,20 @@ const AddCourseSection = () => {
                         <SubHeading>
                             Description
                         </SubHeading>
-                        <TextBox type="text" name='description' ref={register} />
+                        <TextBox type="text" maxLength="150" name='description' ref={register} />
                         <Warning>
                             {errors['description']?.message}
                         </Warning>
                         <SubHeading>
                             Banner Image
                         </SubHeading>
-                        <InputBox type="text" name='imageUrl' ref={register} />
-                        <Warning>
-                            {errors['imageUrl']?.message}
-                        </Warning>
+                        <InputBox type="file" name='imageUrl' ref={register} />
+                        <SwitchWrapper>
+                            <SubHeading>
+                                Currently Running?
+                            </SubHeading>
+                            <CheckBox type="checkbox" name='status' ref={register} />
+                        </SwitchWrapper>
                         <ButtonModified type="submit" primary={true}>
                             Add Course
                         </ButtonModified>

@@ -50,7 +50,11 @@ export const CardImage = styled.img`
 `;
 
 export const TextWrapper = styled.div`
+    height: calc(100% - 200px);
     padding: 30px 30px 50px 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 `;
 
 export const CardTitle = styled.p`

@@ -48,7 +48,7 @@ export const RightSection = styled.form`
 
 export const Image = styled.img`
     width: 100%;
-    max-width: 500px;
+    max-width: 400px;
     height: auto;
 `;
 
@@ -64,13 +64,19 @@ export const SubHeading = styled.p`
     margin:${({center}) => (center ? '1rem auto 0.5rem auto' : '1rem 0 0.5rem 0')};
 `;
 
+export const TopWarning = styled.p`
+    font-size: 1.1rem;
+    color: ${({failed}) => (failed ? 'red' : 'green')};
+    margin: 0 auto 1.5rem auto;
+`;
+
 export const Warning = styled.p`
     font-size: 1rem;
-    color: ${({failed}) => (failed ? 'red' : '#4b59f7')};
-    margin: ${({failed}) => (failed ? '0 auto 1rem auto' : '0')};
+    color: #4b59f7;
 `;
 
 export const InputBox = styled.input`
+    width: 100%;
     height: 30px;
     padding-left: 10px;
     padding-right: 10px;
@@ -80,7 +86,19 @@ export const InputBox = styled.input`
 export const TextBox = styled.textarea`
     resize: none;
     height: 100px;
+    padding: 5px 10px;
     margin-bottom: 0.7rem;
+`;
+
+export const SwitchWrapper = styled.div`
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+`;
+
+export const CheckBox = styled.input`
+    margin-left: 15px;
+    margin-top: 6px;
 `;
 
 export const ButtonModified = styled(Button)`
