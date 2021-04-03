@@ -56,12 +56,12 @@ const CourseSection = () => {
                                 {course.desc}
                             </CardDesc>
                             {(user && user.role==='ADMIN') ?
-                                (<Link to='/sign-in'>
+                                (<Link to={`/admin/course/${course.id}`}>
                                     <Button fullWidth primary="primary">
                                         Manage Course
                                     </Button>
                                 </Link>) :
-                                (<Link to='/sign-in'>
+                                (<Link to={`/enroll/course/${course.id}`}>
                                     <Button fullWidth primary="primary">
                                         Enroll Now
                                     </Button>

@@ -8,3 +8,4 @@ export { default as SignupSection } from './SignupSection/SignupSection';
 export { default as PrivateNav } from './PrivateNav/PrivateNav';
 export { default as ControlPanel } from './ControlPanel/ControlPanel';
 export { default as AddCourseSection } from './AddCourseSection/AddCourseSection';
+export { default as CoursePanel } from './CoursePanel/CoursePanel';

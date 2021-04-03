@@ -11,6 +11,7 @@ import AdminDashboard from './pages/AdminDashboard/AdminDashboard';
 import PrivateRoute from './services/PrivateRoute';
 import ManageCourses from './pages/ManageCourses/ManageCourses';
 import AddCourse from './pages/AddCourse/AddCourse';
+import CoursePage from './pages/CoursePage/CoursePage';
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
           <PrivateRoute role='ADMIN' path='/admin/dashboard' exact component={AdminDashboard} />
           <PrivateRoute role='ADMIN' path='/admin/courses' exact component={ManageCourses} />
           <PrivateRoute role='ADMIN' path='/add/course' exact component={AddCourse} />
+          <PrivateRoute role='ADMIN' path='/admin/course/:courseId' exact component={CoursePage} />
         </Switch>
         <Footer />
       </Router>
