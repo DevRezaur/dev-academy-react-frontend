@@ -1,13 +1,14 @@
 import React from 'react';
-import { PrivateNav } from '../../components';
+import { CourseSection, EnrolledCourse, PrivateNav, TopSection } from '../../components';
+import { data } from './Data';
 
 const UserDashboard = () => {
-    let user = JSON.parse(localStorage.getItem('user'))
-
     return (
         <>
             <PrivateNav />
-            <h1>Hi ${user.fullname}</h1>
+            <TopSection {...data} />
+            <CourseSection />
+            <EnrolledCourse />
         </>
     )
 }

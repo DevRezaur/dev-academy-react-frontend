@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const CourseSection = styled.section`
-    padding: 80px 0px 160px 0px;
+    padding: 80px 0px;
 `;
 
 export const BannerSection = styled.div`

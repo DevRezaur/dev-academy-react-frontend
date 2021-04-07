@@ -85,7 +85,7 @@ const CoursePanel = () => {
                 'resourcesLink': resourcesLink,
             }
         })
-        .then((response) => { 
+        .then((response) => {
             if (response.data) {
                 console.log(response.data);
             }
@@ -117,7 +117,7 @@ const CoursePanel = () => {
                 <Container>
                     <BannerSection>
                         <ImageSection>
-                            <HeroImage src={require('../../Local Bucket/' + course.imageUrl).default} alt='Course Image' />
+                            <HeroImage src={course.imageUrl} alt='Course Image' />
                         </ImageSection>
                         <InfoSection>
                             <CourseTitle>
@@ -127,7 +127,7 @@ const CoursePanel = () => {
                                 {course.desc}
                             </CourseDesc>
                             {(user && user.role==='ADMIN') &&
-                                (<Link to={`/admin/courses`}>
+                                (<Link to={`/edit/course/${courseId}`}>
                                     <Button fullWidth primary="primary">
                                         Update Course
                                     </Button>

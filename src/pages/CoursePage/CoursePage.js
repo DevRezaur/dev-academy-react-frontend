@@ -1,11 +1,12 @@
 import React from 'react'
-import { CoursePanel, PrivateNav } from '../../components'
+import { CoursePanel, PostComponent, PrivateNav } from '../../components'
 
 const CoursePage = () => {
     return (
         <>
             <PrivateNav />
-            <CoursePanel />  
+            <CoursePanel />
+            <PostComponent /> 
         </>
     )
 }

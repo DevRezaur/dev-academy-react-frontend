@@ -23,9 +23,11 @@ function App() {
           <Route path='/sign-in' exact component={Signin} />
           <Route path='/sign-up' exact component={Signup} />
           <PrivateRoute role='USER' path='/user/dashboard' exact component={UserDashboard} />
+          <PrivateRoute role='USER' path='/user/course/:courseId' exact component={CoursePage} />
           <PrivateRoute role='ADMIN' path='/admin/dashboard' exact component={AdminDashboard} />
           <PrivateRoute role='ADMIN' path='/admin/courses' exact component={ManageCourses} />
           <PrivateRoute role='ADMIN' path='/add/course' exact component={AddCourse} />
+          <PrivateRoute role='ADMIN' path='/edit/course/:courseId' exact component={AddCourse} />
           <PrivateRoute role='ADMIN' path='/admin/course/:courseId' exact component={CoursePage} />
         </Switch>
         <Footer />

@@ -9,3 +9,6 @@ export { default as PrivateNav } from './PrivateNav/PrivateNav';
 export { default as ControlPanel } from './ControlPanel/ControlPanel';
 export { default as AddCourseSection } from './AddCourseSection/AddCourseSection';
 export { default as CoursePanel } from './CoursePanel/CoursePanel';
+export { default as TopSection } from './TopSection/TopSection';
+export { default as PostComponent } from './PostComponent/PostComponent';
+export { default as EnrolledCourse } from './EnrolledCourse/EnrolledCourse';

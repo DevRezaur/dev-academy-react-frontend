@@ -1,6 +1,5 @@
 import React from 'react';
-import { ControlPanel, PrivateNav } from '../../components';
-import TopSection from '../../components/TopSection/TopSection';
+import { ControlPanel, PrivateNav, TopSection } from '../../components';
 import { data } from './Data';
 
 const AdminDashboard = () => {

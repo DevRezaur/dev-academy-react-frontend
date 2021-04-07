@@ -86,7 +86,7 @@ export const InputBox = styled.input`
 export const TextBox = styled.textarea`
     resize: none;
     height: 100px;
-    padding: 5px 10px;
+    padding: 10px;
     margin-bottom: 0.7rem;
 `;
 

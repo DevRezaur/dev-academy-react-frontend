@@ -15,16 +15,15 @@ import { ButtonModified, GridWrapper,
         Warning,
         TextBox,
         SwitchWrapper,
-        CheckBox} from './AddCourseSection.element'
+        CheckBox} from './AddCourseSection.element';
 
 const AddCourseSection = () => {
-    const [warning, setWarning] = useState('');
+    const [warning, setWarning] = useState();
     const [failed, setFailed] = useState(true);
-    let imageUrl = 'default_course.jpg';
 
     const schema = yup.object().shape({
         title: yup.string().required(),
-        description: yup.string().required()
+        description: yup.string().required(),
     });
 
     const { register, handleSubmit, errors } = useForm({
@@ -32,10 +31,8 @@ const AddCourseSection = () => {
     });
 
     const onSubmit = (data) => {
-        if(data.imageUrl[0]) {
-            imageUrl = data.imageUrl[0].name;
-            uploadImage(data.imageUrl[0]);
-        }
+        if(data.image[0])
+            uploadImage(data.image[0]);
         if(data.status)
             data.status = 'running';
         else
@@ -53,7 +50,10 @@ const AddCourseSection = () => {
             data: {
                 'title': data.title,
                 'desc': data.description,
-                'imageUrl': imageUrl,
+                'image': data.image[0] ? data.image[0].name : 'default_course.jpg',
+                'imageUrl': data.image[0] ? 
+                            `https://devrezaur.com/File-Bucket/image/${data.image[0].name}` : 
+                            'https://devrezaur.com/File-Bucket/image/default_course.jpg',
                 'status': data.status,
             }
         })
@@ -70,11 +70,32 @@ const AddCourseSection = () => {
         });
     };
 
+    // const uploadImage = async (image) => {
+    //     const formData = new FormData();
+	// 	formData.append('file', image);
+
+    //     await axios.post('http://localhost:8080/general/uploadFile', formData, {
+    //         headers: {
+    //           'Content-Type': 'multipart/form-data'
+    //         }
+    //     })
+    //     .then((response) => { 
+    //         if (response.data) {
+    //             setFailed(false);
+    //         }
+    //     })
+    //     .catch((error) => {
+    //         setFailed(true);
+    //         setWarning('Failed to add image !');
+    //         console.log(error);
+    //     });   
+    // }
+
     const uploadImage = async (image) => {
         const formData = new FormData();
-		formData.append('file', image);
+		formData.append('sendimage', image);
 
-        await axios.post('http://localhost:8080/general/uploadFile', formData, {
+        await axios.post('https://devrezaur.com/File-Bucket/image-upload.php', formData, {
             headers: {
               'Content-Type': 'multipart/form-data'
             }
@@ -122,7 +143,7 @@ const AddCourseSection = () => {
                         <SubHeading>
                             Banner Image
                         </SubHeading>
-                        <InputBox type="file" name='imageUrl' ref={register} />
+                        <InputBox type="file" name='image' ref={register} />
                         <SwitchWrapper>
                             <SubHeading>
                                 Currently Running?
