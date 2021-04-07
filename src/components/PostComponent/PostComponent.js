@@ -55,7 +55,7 @@ const PostComponent = () => {
                                 <Label>
                                     Resource Material:
                                 </Label>
-                                <CustomLink href={post.resourcesLink} download={post.resource}>{post.resource}</CustomLink>
+                                {post.resourcesLink && <CustomLink href={post.resourcesLink} download={post.resource}>{post.resource}</CustomLink>}
                             </ResourceSection>
                             <ButtonSection>
                                 <Button type="button" fullWidth primary="primary">

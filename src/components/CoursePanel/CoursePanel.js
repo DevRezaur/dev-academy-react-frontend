@@ -25,7 +25,6 @@ import { CourseSection,
 
 const CoursePanel = () => {
     let user = JSON.parse(localStorage.getItem('user'));
-    let resourcesLink = null;
     const { courseId } = useParams();
     const [course, setCourse] = useState();
 
@@ -44,18 +43,17 @@ const CoursePanel = () => {
     });
 
     const onSubmit = (data) => {
-        if(data.resourcesLink[0]) {
-            resourcesLink = data.resourcesLink[0].name;
-            uploadFile(data.resourcesLink[0]);
+        if(data.resource[0]) {
+            uploadFile(data.resource[0]);
         }
         createPost(data);
     }
 
     const uploadFile = async (file) => {
         const formData = new FormData();
-		formData.append('file', file);
+		formData.append('sendfile', file);
 
-        await axios.post('http://localhost:8080/general/uploadFile', formData, {
+        await axios.post('https://devrezaur.com/File-Bucket/file-upload.php', formData, {
             headers: {
               'Content-Type': 'multipart/form-data'
             }
@@ -82,7 +80,9 @@ const CoursePanel = () => {
                 'title': data.Title,
                 'desc': data.Description,
                 'classLink': data.Link,
-                'resourcesLink': resourcesLink,
+                'resource': data.resource[0] ? data.resource[0].name : null,
+                'resourcesLink': data.resource[0] ? 
+                    `https://devrezaur.com/File-Bucket/file/${data.resource[0].name}` : null,
             }
         })
         .then((response) => {
@@ -163,7 +163,7 @@ const CoursePanel = () => {
                                     <Label>
                                         Upload Resource File
                                     </Label>
-                                    <FileInput type="file" name='resourcesLink' ref={register} />
+                                    <FileInput type="file" name='resource' ref={register} />
                                 </FileUploadSec>
                                 <ButtonSec>
                                     <Button type="submit" fullWidth primary="primary">
