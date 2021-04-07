@@ -7,8 +7,8 @@ const UserDashboard = () => {
         <>
             <PrivateNav />
             <TopSection {...data} />
-            <CourseSection />
             <EnrolledCourse />
+            <CourseSection />
         </>
     )
 }

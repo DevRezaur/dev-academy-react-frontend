@@ -12,6 +12,7 @@ import PrivateRoute from './services/PrivateRoute';
 import ManageCourses from './pages/ManageCourses/ManageCourses';
 import AddCourse from './pages/AddCourse/AddCourse';
 import CoursePage from './pages/CoursePage/CoursePage';
+import EnrollPage from './pages/EnrollPage/EnrollPage';
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
           <Route path='/sign-up' exact component={Signup} />
           <PrivateRoute role='USER' path='/user/dashboard' exact component={UserDashboard} />
           <PrivateRoute role='USER' path='/user/course/:courseId' exact component={CoursePage} />
+          <PrivateRoute role='USER' path='/enroll/course/:courseId' exact component={EnrollPage} />
           <PrivateRoute role='ADMIN' path='/admin/dashboard' exact component={AdminDashboard} />
           <PrivateRoute role='ADMIN' path='/admin/courses' exact component={ManageCourses} />
           <PrivateRoute role='ADMIN' path='/add/course' exact component={AddCourse} />
