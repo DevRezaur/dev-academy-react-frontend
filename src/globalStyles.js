@@ -36,6 +36,7 @@ export const Container = styled.div`
 export const Button = styled.button`
     color: #fff;
     background: ${({primary}) => (primary ? '#4b59f7' : '#0467fb')};
+    background: ${({danger}) => (danger ? 'red' : '')};
     font-size: ${({fontBig}) => (fontBig ? '22px' : '16px')};
     padding: ${({big}) => (big ? '12px 64px' : '10px 20px')};
     width: ${({fullWidth}) => (fullWidth ? '100%' : '')};
@@ -48,6 +49,7 @@ export const Button = styled.button`
     &:hover {
         transition: all 0.3s ease-out;
         background: ${({primary}) => (primary ? '#0467fb' : '#4b59f7')};
+        background: ${({danger}) => (danger ? 'red' : '')};
     }
 
     @media screen and (max-width: 900px) {

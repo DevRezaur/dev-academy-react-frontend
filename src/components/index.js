@@ -13,3 +13,4 @@ export { default as TopSection } from './TopSection/TopSection';
 export { default as PostComponent } from './PostComponent/PostComponent';
 export { default as EnrolledCourse } from './EnrolledCourse/EnrolledCourse';
 export { default as EnrollComponent } from './EnrollComponent/EnrollComponent';
+export { default as PaymentList } from './PaymentList/PaymentList';

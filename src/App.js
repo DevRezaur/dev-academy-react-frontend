@@ -13,6 +13,7 @@ import ManageCourses from './pages/ManageCourses/ManageCourses';
 import AddCourse from './pages/AddCourse/AddCourse';
 import CoursePage from './pages/CoursePage/CoursePage';
 import EnrollPage from './pages/EnrollPage/EnrollPage';
+import ManagePayments from './pages/ManagePayments/ManagePayments';
 
 function App() {
   return (
@@ -31,6 +32,7 @@ function App() {
           <PrivateRoute role='ADMIN' path='/add/course' exact component={AddCourse} />
           <PrivateRoute role='ADMIN' path='/edit/course/:courseId' exact component={AddCourse} />
           <PrivateRoute role='ADMIN' path='/admin/course/:courseId' exact component={CoursePage} />
+          <PrivateRoute role='ADMIN' path='/admin/payments' exact component={ManagePayments} />
         </Switch>
         <Footer />
       </Router>

@@ -23,7 +23,7 @@ const ControlPanel = () => {
                                 Add Courses
                             </StyledButton>
                         </Link>
-                        <Link to='/sign-in'>
+                        <Link to='/admin/payments'>
                             <StyledButton fullWidth primary="primary">
                                 Manage Payments
                             </StyledButton>
