@@ -28,12 +28,12 @@ const ControlPanel = () => {
                                 Manage Payments
                             </StyledButton>
                         </Link>
-                        <Link to='/sign-in'>
+                        <Link to='/admin/allUsers'>
                             <StyledButton fullWidth primary="primary">
-                                View Students
+                                View Users
                             </StyledButton>
                         </Link>
-                        <Link to='/sign-in'>
+                        <Link to='/admin/addAdmin'>
                             <StyledButton fullWidth primary="primary">
                                 Add Admins
                             </StyledButton>

@@ -22,8 +22,9 @@ const AddCourseSection = () => {
     const [failed, setFailed] = useState(true);
 
     const schema = yup.object().shape({
-        title: yup.string().required(),
-        description: yup.string().required(),
+        title: yup.string().required('Please provide title'),
+        description: yup.string().required('Please provide description'),
+        price: yup.number().required('Please provide course price').typeError('Invalid price')
     });
 
     const { register, handleSubmit, errors } = useForm({
@@ -51,6 +52,7 @@ const AddCourseSection = () => {
                 'title': data.title,
                 'desc': data.description,
                 'image': data.image[0] ? data.image[0].name : 'default_course.jpg',
+                'price': data.price,
                 'imageUrl': data.image[0] ? 
                             `https://devrezaur.com/File-Bucket/image/${data.image[0].name}` : 
                             'https://devrezaur.com/File-Bucket/image/default_course.jpg',
@@ -69,27 +71,6 @@ const AddCourseSection = () => {
             console.log(error);
         });
     };
-
-    // const uploadImage = async (image) => {
-    //     const formData = new FormData();
-	// 	formData.append('file', image);
-
-    //     await axios.post('http://localhost:8080/general/uploadFile', formData, {
-    //         headers: {
-    //           'Content-Type': 'multipart/form-data'
-    //         }
-    //     })
-    //     .then((response) => { 
-    //         if (response.data) {
-    //             setFailed(false);
-    //         }
-    //     })
-    //     .catch((error) => {
-    //         setFailed(true);
-    //         setWarning('Failed to add image !');
-    //         console.log(error);
-    //     });   
-    // }
 
     const uploadImage = async (image) => {
         const formData = new FormData();
@@ -139,6 +120,13 @@ const AddCourseSection = () => {
                         <TextBox type="text" maxLength="150" name='description' ref={register} />
                         <Warning>
                             {errors['description']?.message}
+                        </Warning>
+                        <SubHeading>
+                            Course Price
+                        </SubHeading>
+                        <InputBox type="number" name='price' ref={register} />
+                        <Warning>
+                            {errors['price']?.message}
                         </Warning>
                         <SubHeading>
                             Banner Image

@@ -66,6 +66,14 @@ export const CardDesc = styled.p`
     font-size: 18px;
     line-height: 1.5;
     word-spacing: 3px;
-    margin: 30px 0;
+    margin-top: 30px;
     text-align: left;
+`;
+
+export const CardPrice = styled.h3`
+    margin: 15px 0;
+    font-size: 18px;
+    line-height: 24px;
+    color: #fff;
+    text-align: right;
 `;

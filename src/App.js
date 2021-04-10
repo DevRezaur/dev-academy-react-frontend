@@ -14,6 +14,8 @@ import AddCourse from './pages/AddCourse/AddCourse';
 import CoursePage from './pages/CoursePage/CoursePage';
 import EnrollPage from './pages/EnrollPage/EnrollPage';
 import ManagePayments from './pages/ManagePayments/ManagePayments';
+import AllUserPage from './pages/AllUserPage/AllUserPage';
+import ProfilePage from './pages/ProfilePage/ProfilePage';
 
 function App() {
   return (
@@ -33,6 +35,8 @@ function App() {
           <PrivateRoute role='ADMIN' path='/edit/course/:courseId' exact component={AddCourse} />
           <PrivateRoute role='ADMIN' path='/admin/course/:courseId' exact component={CoursePage} />
           <PrivateRoute role='ADMIN' path='/admin/payments' exact component={ManagePayments} />
+          <PrivateRoute role='ADMIN' path='/admin/allUsers' exact component={AllUserPage} />
+          <PrivateRoute role='ADMIN' path='/admin/profile' exact component={ProfilePage} />
         </Switch>
         <Footer />
       </Router>

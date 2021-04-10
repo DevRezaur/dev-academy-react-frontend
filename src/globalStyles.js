@@ -49,7 +49,7 @@ export const Button = styled.button`
     &:hover {
         transition: all 0.3s ease-out;
         background: ${({primary}) => (primary ? '#0467fb' : '#4b59f7')};
-        background: ${({danger}) => (danger ? 'red' : '')};
+        background: ${({danger}) => (danger ? 'orange' : '')};
     }
 
     @media screen and (max-width: 900px) {

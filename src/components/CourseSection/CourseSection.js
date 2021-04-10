@@ -4,6 +4,7 @@ import { Button, Container } from '../../globalStyles';
 import { Card,
         CardDesc,
         CardImage,
+        CardPrice,
         CardTitle,
         CardWrapper,
         Heading,
@@ -55,6 +56,9 @@ const CourseSection = () => {
                             <CardDesc>
                                 {course.desc}
                             </CardDesc>
+                            <CardPrice>
+                                Price: {course.price} BDT
+                            </CardPrice>
                             {(user && user.role==='ADMIN') ?
                                 (<Link to={`/admin/course/${course.id}`}>
                                     <Button fullWidth primary="primary">
