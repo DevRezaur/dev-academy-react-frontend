@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Container } from '../../globalStyles';
 import * as yup from 'yup';
 import { useForm } from 'react-hook-form';
@@ -15,6 +15,7 @@ import { Heading,
 import axios from 'axios';
 
 const ProfileSection = () => {
+    const [user, setUser] = useState(JSON.parse(localStorage.getItem('user')));
     const [id, setId] = useState();
     const [fullname, setFullname] = useState();
     const [imageUrl, setImageUrl] = useState();
@@ -23,6 +24,7 @@ const ProfileSection = () => {
     const [password, setPassword] = useState();
     const [warning, setWarning] = useState('');
     const [failed, setFailed] = useState(true);
+    const hiddenFileInput = useRef(null);
 
     const schema = yup.object().shape({
         fullname: yup.string().required(),
@@ -38,6 +40,10 @@ const ProfileSection = () => {
     useEffect(() => {
         getUserData();
     }, []);
+
+    useEffect(() => {
+        localStorage.setItem('user', JSON.stringify(user));
+    }, [user]);
 
     const getUserData = async () => {
         await axios({
@@ -77,12 +83,65 @@ const ProfileSection = () => {
         .then((response) => {
             if (response.data) {
                 setFailed(false);
-                setWarning('Update Sucessful !')
+                setWarning('Update Sucessful !');
+                setUser({
+                    id: response.data.id,
+                    fullname: response.data.fullname,
+                    imageUrl: response.data.imageUrl,
+                    role: response.data.roles[0].role
+                });
             }
         })
         .catch((error) => {
             setFailed(true);
-            setWarning('Update failed !');
+            setWarning('Info Update failed !');
+            console.log(error);
+        });
+    }
+  
+    const handleClick = event => {
+        hiddenFileInput.current.click();
+    };
+    
+    const uploadImage = async (event) => {
+        const image = event.target.files[0];
+        const formData = new FormData();
+		formData.append('sendimage', image);
+
+        await axios.post('https://devrezaur.com/File-Bucket/image-upload.php', formData, {
+            headers: {
+              'Content-Type': 'multipart/form-data'
+            }
+        })
+        .then((response) => { 
+            if (response.data) {
+                setFailed(false);
+                updateImageInfo(`https://devrezaur.com/File-Bucket/image/${event.target.files[0].name}`);
+            }
+        })
+        .catch((error) => {
+            setFailed(true);
+            setWarning('Failed to add image !');
+            console.log(error);
+        });   
+    }
+
+    const updateImageInfo = async (imageUrl) => {
+        await axios({
+            method: 'POST',
+            url: 'http://localhost:8080/auth/updateImage',
+            data: {
+                'id': JSON.parse(localStorage.getItem('user')).id,
+                'imageUrl': imageUrl,
+            }
+        })
+        .then((response) => {
+            if (response.data) {
+                setImageUrl(imageUrl);
+                console.log(response.data);
+            }
+        })
+        .catch((error) => {
             console.log(error);
         });
     }
@@ -91,13 +150,18 @@ const ProfileSection = () => {
         <div>
             <Wrapper>
                 <Container>
-                    <Image src="https://devrezaur.com/image/profile.png" alt="Profile Image" />
-                    <Heading>
-                        Rezaur Rahman
-                    </Heading>
-                    <StyledButton danger>
+                    {imageUrl && <Image src={imageUrl} alt="Profile Image" />}
+                    {fullname && <Heading>
+                        {fullname}
+                    </Heading>}
+                    <StyledButton danger onClick={handleClick}>
                         Update Profile Picture
                     </StyledButton>
+                    <InputBox type="file"
+                        ref={hiddenFileInput}
+                        onChange={(e) => uploadImage(e)}
+                        style={{display:'none'}}
+                    /> 
                     <UserForm onSubmit={handleSubmit(onSubmit)}>
                         <TopWarning failed = {failed}>
                             {warning}
