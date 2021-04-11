@@ -15,7 +15,7 @@ import {
 const MiniNav = () => {
 
     const [click, setClick] = useState(false);
-    const [buttonLabelSm, setButtonLabelSm] = useState(true);
+    const [buttonLabelSm, setButtonLabelSm] = useState(false);
 
     const handleClick = () => setClick(!click);
 

@@ -29,7 +29,6 @@ const ProfileSection = () => {
     const schema = yup.object().shape({
         fullname: yup.string().required(),
         contact: yup.string().required(),
-        email: yup.string().required().email(),
         password: yup.string().required().min(5)
     });
 
@@ -76,7 +75,7 @@ const ProfileSection = () => {
                 'id': data.id,
                 'fullname': data.fullname,
                 'contact': data.contact,
-                'email': data.email,
+                'email': email,
                 'password': data.password,
             }
         })
@@ -205,7 +204,7 @@ const ProfileSection = () => {
                             type="email" 
                             name='email' 
                             value={email}
-                            onChange={(e) => setEmail(e.target.value)}
+                            disabled
                             ref={register} />}
                         <Warning>
                             {errors['email']?.message}

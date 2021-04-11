@@ -4,7 +4,6 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router';
-import { Link } from 'react-router-dom';
 import { Button, Container } from '../../globalStyles';
 import { CourseSection,
         BannerSection,
@@ -21,7 +20,10 @@ import { CourseSection,
         Warning,
         ButtonWrapper,
         FileUploadSec,
-        ButtonSec} from './CoursePanel.element';
+        ButtonSec,
+        Heading,
+        BannerWrapper,
+        PostWrapper} from './CoursePanel.element';
 
 const CoursePanel = () => {
     let user = JSON.parse(localStorage.getItem('user'));
@@ -88,6 +90,7 @@ const CoursePanel = () => {
         .then((response) => {
             if (response.data) {
                 console.log(response.data);
+                window.location.reload(false);
             }
         })
         .catch((error) => {
@@ -111,32 +114,69 @@ const CoursePanel = () => {
         });
     }
 
+    const changeCourseStatus = async (data) => {
+        await axios({
+            method: 'POST',
+            url: 'http://localhost:8080/admin/addCourse',
+            headers: {
+                'Authorization': `Bearer ${localStorage.getItem('jwt')}`
+            },
+            data: {
+                'id': course.id,
+                'title': data.title,
+                'desc': data.desc,
+                'image': data.image,
+                'price': data.price,
+                'imageUrl': data.imageUrl,
+                'status': data.status === 'running' ? 'down' : 'running',
+            }
+        })
+        .then((response) => { 
+            if (response.data) {
+                getCourse(courseId);
+            }
+        })
+        .catch((error) => {
+            console.log(error);
+        });
+    }
+
     return (
         <>
             {course && <CourseSection>
-                <Container>
-                    <BannerSection>
-                        <ImageSection>
-                            <HeroImage src={course.imageUrl} alt='Course Image' />
-                        </ImageSection>
-                        <InfoSection>
-                            <CourseTitle>
-                                {course.title}
-                            </CourseTitle>
-                            <CourseDesc>
-                                {course.desc}
-                            </CourseDesc>
-                            {(user && user.role==='ADMIN') &&
-                                (<Link to={`/edit/course/${courseId}`}>
-                                    <Button fullWidth primary="primary">
-                                        Update Course
+                <BannerWrapper>
+                    <Container>
+                        <BannerSection>
+                            <ImageSection>
+                                <HeroImage src={course.imageUrl} alt='Course Image' />
+                            </ImageSection>
+                            <InfoSection>
+                                <CourseTitle>
+                                    {course.title}
+                                </CourseTitle>
+                                <CourseDesc>
+                                    {course.desc}
+                                </CourseDesc>
+                                {(user && user.role==='ADMIN') &&
+                                    <Button 
+                                        fullWidth
+                                        primary = {course.status === 'running' ? true : false}
+                                        danger = {course.status === 'down' ? true : false}
+                                        onClick={()=> changeCourseStatus(course)}>
+                                        {`Status: ${course.status}`}
                                     </Button>
-                                </Link>)
                                 }
-                        </InfoSection>
-                    </BannerSection>
-                    {(user && user.role==='ADMIN') &&
-                        (<AddPostSection onSubmit={handleSubmit(onSubmit)}>
+                            </InfoSection>
+                        </BannerSection>
+                    </Container>
+                </BannerWrapper>
+                {(user && user.role==='ADMIN') &&
+                    <PostWrapper>
+                        <Container>
+                        <Heading>
+                            Add New Post
+                        </Heading>
+                        <AddPostSection onSubmit={handleSubmit(onSubmit)}>
                             <Label>
                                 Post Title
                             </Label>
@@ -147,7 +187,7 @@ const CoursePanel = () => {
                             <Label>
                                 Post Description
                             </Label>
-                            <TextBox type="text" name='Description' ref={register} maxLength="1000" />
+                            <TextBox type="text" name='Description' ref={register} maxLength="750" />
                             <Warning>
                                 {errors['Description']?.message}
                             </Warning>
@@ -171,9 +211,10 @@ const CoursePanel = () => {
                                     </Button>
                                 </ButtonSec>
                             </ButtonWrapper>
-                        </AddPostSection>)
-                    }
-                </Container>
+                        </AddPostSection>
+                        </Container>
+                    </PostWrapper>
+                }
             </CourseSection>}
         </>
     )

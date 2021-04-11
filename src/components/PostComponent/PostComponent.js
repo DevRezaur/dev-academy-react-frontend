@@ -2,7 +2,8 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router';
 import { Button, Container } from '../../globalStyles';
-import { PostBody, 
+import { PostBody,
+        Heading, 
         PostSection, 
         Title,
         Description, 
@@ -10,7 +11,8 @@ import { PostBody,
         CustomLink,
         ResourceSection,
         Label,
-        ButtonSection} from './PostComponent.element';
+        ButtonSection,
+        StyledExternalLink} from './PostComponent.element';
 
 const PostComponent = () => {
     const [posts, setPosts] = useState();
@@ -42,6 +44,9 @@ const PostComponent = () => {
         <>
             <PostSection>
                 <Container>
+                    <Heading>
+                        Class Post
+                    </Heading>
                     {posts && posts.map((post) =>
                     <PostBody key={post.id}>
                         <Title>
@@ -59,7 +64,7 @@ const PostComponent = () => {
                             </ResourceSection>
                             <ButtonSection>
                                 <Button type="button" fullWidth primary="primary">
-                                    Join Class
+                                    <StyledExternalLink href={post.classLink}>Join Class</StyledExternalLink>
                                 </Button>
                             </ButtonSection>
                         </ButtonGroup>

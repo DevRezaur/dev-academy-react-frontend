@@ -33,7 +33,6 @@ function App() {
           <PrivateRoute role='ADMIN' path='/admin/dashboard' exact component={AdminDashboard} />
           <PrivateRoute role='ADMIN' path='/admin/courses' exact component={ManageCourses} />
           <PrivateRoute role='ADMIN' path='/add/course' exact component={AddCourse} />
-          <PrivateRoute role='ADMIN' path='/edit/course/:courseId' exact component={AddCourse} />
           <PrivateRoute role='ADMIN' path='/admin/course/:courseId' exact component={CoursePage} />
           <PrivateRoute role='ADMIN' path='/admin/payments' exact component={ManagePayments} />
           <PrivateRoute role='ADMIN' path='/admin/allUsers' exact component={AllUserPage} />

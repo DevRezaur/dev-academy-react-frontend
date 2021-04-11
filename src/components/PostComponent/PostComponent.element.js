@@ -1,7 +1,20 @@
+import { ExternalLink } from 'react-external-link';
 import styled from 'styled-components';
 
 export const PostSection = styled.section`
     padding-bottom: 80px;
+`;
+
+export const Heading = styled.h1`
+    margin-bottom: 50px;
+    font-size: 42px;
+    line-height: 1.1;
+    color: #1c2237;
+    text-align: center;
+
+    @media screen and (max-width: 900px) {
+        font-size: 36px;
+    }
 `;
 
 export const PostBody = styled.div`
@@ -74,5 +87,11 @@ export const CustomLink = styled.a`
     text-decoration: none;
     color: #a9b3c1;
     font-weight: 900;
-    width: min-content;
+    width: fit-content;
+`;
+
+export const StyledExternalLink = styled(ExternalLink)`
+    text-decoration: none;
+    color: #fff;
+    font-weight: 900;
 `;

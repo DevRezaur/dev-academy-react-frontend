@@ -15,7 +15,7 @@ export const Card = styled.div`
 `;
 
 export const CardTitle = styled.h1`
-    margin-bottom: 50px;
+    margin-bottom: 25px;
     font-size: 32px;
     line-height: 1.1;
     color: #fff;
@@ -25,6 +25,13 @@ export const CardTitle = styled.h1`
         margin-bottom: 30px;
         font-size: 26px;
     }
+`;
+
+export const Warning = styled.p`
+    font-size: 1.2rem;
+    color: ${({failed}) => (failed ? 'red' : 'green')};
+    text-align: center;
+    margin-bottom: 25px;
 `;
 
 export const CardDesc = styled.p`

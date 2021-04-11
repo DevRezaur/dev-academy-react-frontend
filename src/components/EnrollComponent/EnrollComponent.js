@@ -1,12 +1,14 @@
 import axios from 'axios';
-import React from 'react';
+import React, { useState } from 'react';
 import { useParams } from 'react-router';
 import { Container } from '../../globalStyles';
-import { Card, CardTitle, CardDesc, Label, Input, PaymentForm, ButtonModified } from './EnrollComponent.element';
+import { Warning, Card, CardTitle, CardDesc, Label, Input, PaymentForm, ButtonModified } from './EnrollComponent.element';
 
 const EnrollComponent = () => {
     let user = JSON.parse(localStorage.getItem('user'));
     const { courseId } = useParams();
+    const [warning, setWarning] = useState('');
+    const [failed, setFailed] = useState(false);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -27,10 +29,17 @@ const EnrollComponent = () => {
         .then((response) => {
             if (response.data) {
                 console.log(response.data);
+                setFailed(false);
+                setWarning('Payment seccesful !');
+                e.target[0].value = null;
+                e.target[1].value = null;
+                e.target[2].value = null;
             }
         })
         .catch((error) => {
             console.log(error);
+            setFailed(true);
+            setWarning('Payment Failed !');
         });
     }
 
@@ -41,6 +50,9 @@ const EnrollComponent = () => {
                     <CardTitle>
                         Smart Payment
                     </CardTitle>
+                    <Warning failed={failed}>
+                        {warning}
+                    </Warning>
                     <CardDesc>
                         Welcome to smart payment system of Dev Academy. Using smart payment system you can pay 
                         the enrollment fee of our courses via online. What's smart about our smart payment system? 

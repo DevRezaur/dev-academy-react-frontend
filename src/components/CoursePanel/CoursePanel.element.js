@@ -1,6 +1,11 @@
 import styled from 'styled-components';
 
 export const CourseSection = styled.section`
+    padding-bottom: 80px;
+`;
+
+export const BannerWrapper = styled.div`
+    background-color: #101522;
     padding: 80px 0px;
 `;
 
@@ -11,8 +16,7 @@ export const BannerSection = styled.div`
     grid-template-columns: 1fr 1fr;
     grid-template-rows: auto;
     grid-template-areas: 'ImageSection InfoSection';
-    border: 2px solid #101522;
-    border-radius: 4px;
+    box-shadow: 5px 5px 5px 5px rgba(0,0,0,1);
     
     @media screen and (max-width: 1000px) {
         grid-template-columns: 1fr;
@@ -41,6 +45,18 @@ export const InfoSection = styled.div`
     justify-content: center;
 `;
 
+export const Heading = styled.h1`
+    margin-bottom: 24px;
+    font-size: 42px;
+    line-height: 1.1;
+    color: #1c2237;
+    text-align: center;
+
+    @media screen and (max-width: 900px) {
+        font-size: 36px;
+    }
+`;
+
 export const CourseTitle = styled.h1`
     margin-bottom: 24px;
     font-size: 36px;
@@ -58,6 +74,11 @@ export const CourseDesc = styled.p`
     line-height: 1.5;
     word-spacing: 3px;
     margin-bottom: 24px;
+`;
+
+export const PostWrapper = styled.div`
+    background-color: #f5f5f5;
+    padding: 80px 0px;
 `;
 
 export const AddPostSection = styled.form`
@@ -91,14 +112,14 @@ export const FileInput = styled.input`
 
 export const TextBox = styled.textarea`
     resize: none;
-    height: 150px;
+    height: 100px;
     width: 100%;
     padding: 10px;
     margin: 8px 0 20px 0;
     font-size: 16px;  
 
     @media screen and (max-width: 1000px) {
-        height: 250px;
+        height: 150px;
     }
 `;
 

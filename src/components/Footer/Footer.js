@@ -17,8 +17,8 @@ const Footer = () => {
                     <FooterSubText>
                         You can unsubscibe anytime
                     </FooterSubText>
-                    <Form>
-                        <FormInput name="email" type="email" placeholder="Your Email" />
+                    <Form action="mailto:mail@devrezaur.com" method="post" enctype="text/plain">
+                        <FormInput name="mail" type="email" required placeholder="Your Email" />
                         <Button fontBig>Subscribe</Button>
                     </Form>
                 </FooterSubscription>
