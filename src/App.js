@@ -37,6 +37,7 @@ function App() {
           <PrivateRoute role='ADMIN' path='/admin/payments' exact component={ManagePayments} />
           <PrivateRoute role='ADMIN' path='/admin/allUsers' exact component={AllUserPage} />
           <PrivateRoute role='ADMIN' path='/admin/profile' exact component={ProfilePage} />
+          <PrivateRoute role='ADMIN' path='/admin/addAdmin' exact component={Signup} />
         </Switch>
         <Footer />
       </Router>
